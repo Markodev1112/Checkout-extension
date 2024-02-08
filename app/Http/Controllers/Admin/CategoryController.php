@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate();
+        $categories = Category::latest('id')->paginate();
 
         return view('admin.categories.index', compact('categories'));
 
@@ -32,7 +32,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        Category::create($request->all());
+
+        session()->flash('swal',[
+            'icon' => 'success',
+            'title' => '¡Bien hecho!',
+            'text' => 'La categoría se creó correctamente.',
+        ]);
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
