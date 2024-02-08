@@ -5,6 +5,12 @@
             'url' => route('admin.dashboard'),
             'active' => request()->routeIs('admin.dashboard'),
             'icon' => 'fa-solid fa-gauge-high',
+        ],
+        [
+            'name' => 'Categorías',
+            'url' => route('admin.categories.index'),
+            'active' => request()->routeIs('admin.categories.*'),
+            'icon' => 'fa-solid fa-inbox',
         ]
     ]
 @endphp
