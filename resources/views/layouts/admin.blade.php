@@ -23,6 +23,8 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        @stack('css')
     </head>
     <body class="font-sans antialiased sm:overflow-auto"
         :class="{ 'overflow-hidden': open }"
@@ -55,6 +57,8 @@
                 Swal.fire( @json(session('swal')) );
             </script>
         @endif
+
+        @stack('js')
 
     </body>
 </html>
