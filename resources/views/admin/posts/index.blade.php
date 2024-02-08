@@ -1,5 +1,9 @@
 <x-admin-layout>
 
+    <div class="flex justify-end mb-4">
+        <a class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" href="{{route('admin.posts.create')}}">Nuevo</a>
+    </div>
+
     <ul class="space-y-8">
         @foreach ($posts as $post)
             <li class="grid grid-cols-1 lg:grid-cols-2 gap-4">

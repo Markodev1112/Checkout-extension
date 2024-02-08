@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
 
-            $table->text('excerpt');
+            $table->text('excerpt')->nullable();
 
-            $table->mediumText('body');
+            $table->mediumText('body')->nullable();
 
             $table->string('image_path')->nullable();
 
-            $table->boolean('published');
+            $table->boolean('published')->default(false);
 
             $table->foreignId('category_id')->constrained();
             

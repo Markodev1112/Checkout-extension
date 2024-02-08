@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'category_id',
+        'user_id',
+    ];
     
     // Relacion de uno a uno inversa  -- Creo que aquí se equivocó
     public function category(){
