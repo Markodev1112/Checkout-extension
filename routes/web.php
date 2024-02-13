@@ -61,8 +61,10 @@ Route::get('/prueba3', function(){
     // return Storage::directories('posts');
     // return Storage::allDirectories('posts');
     // Storage::makeDirectory('posts/prueba-1');
-    Storage::deleteDirectory('posts/prueba-1');
+    // Storage::deleteDirectory('posts/prueba-1');
 
-    return "se elimino el direcorio";
+    return Storage::download('posts/articulo-de-prueba.jpg');
+
+    // return "se elimino el direcorio";
 
 });
