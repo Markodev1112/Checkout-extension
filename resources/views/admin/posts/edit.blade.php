@@ -73,7 +73,7 @@
                     </option>
                 @endforeach --}}
                 @foreach ($post->tags as $tag)
-                    <option value="{{ $tag->id }}" selected>
+                    <option value="{{ $tag->name }}" selected>
                         {{ $tag->name}}
                     </option>
                 @endforeach
@@ -136,6 +136,8 @@
         <script>
             $(document).ready(function() {
                 $('.tag-multiple').select2({
+                    tags: true,
+                    tokenSeparators: [',',' '],
                     ajax: {
                         url: "{{ route('api.tags.index') }}",
                         dataType: 'json',

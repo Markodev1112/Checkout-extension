@@ -75,9 +75,20 @@ class PostController extends Controller
             'excerpt' => $request->published ? 'required' : 'nullable',
             'body' => $request->published ? 'required' : 'nullable',
             'published' => 'required|boolean',
+            'tags' => 'nullable|array',
         ]);
 
-        $post->tags()->sync($request->tags);
+        $tags = [];
+
+        foreach( $request->tags ?? [] as $name ){
+            $tag = Tag::firstOrCreate([
+                'name' => $name,
+            ]);
+
+            $tags[] = $tag->id;
+        }
+
+        $post->tags()->sync($tags);
 
         $post->update($request->all());
 
