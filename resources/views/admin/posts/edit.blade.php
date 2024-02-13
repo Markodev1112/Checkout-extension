@@ -1,5 +1,9 @@
 <x-admin-layout>
 
+    @push('css')
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
+
     <form action="{{ route('admin.posts.update', $post) }}" method="POST">
         
         @csrf
@@ -53,6 +57,23 @@
                 {{ old('excerpt', $post->excerpt) }}
             </x-textarea>
         </div>
+
+        <div class="mb-4">
+            <x-label class="mb-1">
+                Etiquetas
+            </x-label>
+            <select class="tag-multiple w-full" name="tags[]" multiple="multiple">
+                @foreach ($tags as $tag)
+                    <option
+                        {{-- @selected( $post->tags->contains($tag->id) ) --}}
+                        @selected( collect( old('tags', $post->tags->pluck('id')) )->contains($tag->id) )
+                        value="{{ $tag->id }}"
+                    >
+                        {{ $tag->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         
         <div class="mb-4">
             <x-label class="mb-1">
@@ -104,6 +125,15 @@
     </form>
 
     @push('js')
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.tag-multiple').select2();
+            });
+        </script>
+
         <script>
             function deletePost(){
                 let form = document.getElementById('formDelete');
