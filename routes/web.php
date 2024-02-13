@@ -32,8 +32,6 @@ Route::get('/prueba', function(){
 
     $path = "posts/articulo-de-prueba.jpg";
 
-    Storage::copy($path, $target);
-
     if ( Storage::exists($path) ) {
         $path = str_replace('.png', '-copia.png', $path);
     }
