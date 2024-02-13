@@ -32,10 +32,26 @@ Route::get('/prueba', function(){
 
     $path = "posts/articulo-de-prueba.jpg";
 
+    Storage::copy($path, $target);
+
     if ( Storage::exists($path) ) {
         $path = str_replace('.png', '-copia.png', $path);
     }
 
     return $path;
+
+});
+
+Route::get('/prueba2', function(){
+
+    /* $path = "posts/articulo-de-prueba.jpg";
+    $target = "posts2/articulo-de-prueba.jpg";
+    Storage::copy($path, $target);
+    return "El archivo ha sido copiado"; */
+
+    $path = "posts2/articulo-de-prueba.jpg";
+    $target = "posts3/articulo-de-prueba.jpg";
+    Storage::move($path, $target);
+    return "El archivo ha sido movido";
 
 });
