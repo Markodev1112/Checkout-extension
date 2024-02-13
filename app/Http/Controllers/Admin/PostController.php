@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -68,6 +69,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
 
+        // return $request->all();
+
         $request->validate([
             'title' => 'required',
             'slug' => 'required|unique:posts,slug,'.$post->id,
@@ -76,7 +79,10 @@ class PostController extends Controller
             'body' => $request->published ? 'required' : 'nullable',
             'published' => 'required|boolean',
             'tags' => 'nullable|array',
+            'image' => 'nullable|image|',
         ]);
+
+        $data = $request->all();
 
         $tags = [];
 
@@ -90,7 +96,16 @@ class PostController extends Controller
 
         $post->tags()->sync($tags);
 
-        $post->update($request->all());
+        if ( $request->file('image') ) {
+
+            if ( $post->image_path ) {
+                Storage::delete($post->image_path);
+            }
+
+            $data['image_path'] = Storage::put('posts', $request->image);
+        }
+
+        $post->update($data);
 
         session()->flash('swal',[
             'icon' => 'success',

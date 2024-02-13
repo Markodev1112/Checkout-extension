@@ -90,7 +90,7 @@
             <x-label class="mb-1">
                 Etiquetas
             </x-label>
-            <select class="tag-multiple w-full" name="tags[]" multiple="multiple">
+            <select class="tag-multiple" name="tags[]" multiple="multiple" style="width: 100%">
                 {{-- @foreach ($tags as $tag)
                     <option --}}
                         {{-- @selected( $post->tags->contains($tag->id) ) --}}
