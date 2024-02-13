@@ -53,3 +53,16 @@ Route::get('/prueba2', function(){
     return "El archivo ha sido movido";
 
 });
+
+Route::get('/prueba3', function(){
+
+    // return Storage::files('posts');
+    // return Storage::allFiles('posts');
+    // return Storage::directories('posts');
+    // return Storage::allDirectories('posts');
+    // Storage::makeDirectory('posts/prueba-1');
+    Storage::deleteDirectory('posts/prueba-1');
+
+    return "se elimino el direcorio";
+
+});
