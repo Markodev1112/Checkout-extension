@@ -81,11 +81,35 @@
         </div>
 
         <div class="flex justify-end">
+
+            <x-danger-button class="mr-2" onclick="deletePost()">
+                Eliminar
+            </x-danger-button>
+
             <x-button>
                 Actualizar
             </x-button>
+        
         </div>
 
     </form>
+
+    <form action="{{route('admin.posts.destroy', $post)}}"
+        method="POST"
+        id="formDelete">
+
+        @csrf
+        @method('DELETE')
+
+    </form>
+
+    @push('js')
+        <script>
+            function deletePost(){
+                let form = document.getElementById('formDelete');
+                form.submit();
+            }
+        </script>
+    @endpush
     
 </x-admin-layout>
