@@ -104,7 +104,9 @@ class PostController extends Controller
 
             $file_name = $request->slug . '.' . $request->file('image')->getClientOriginalExtension();
 
-            $data['image_path'] = Storage::putFileAs('posts', $request->image, $file_name);
+            // $data['image_path'] = Storage::putFileAs('posts', $request->image, $file_name);
+            $data['image_path'] = $request->file('image')->storeAs('posts', $file_name);
+
         }
 
         $post->update($data);
