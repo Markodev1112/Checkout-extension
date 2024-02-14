@@ -43,7 +43,7 @@ class Post extends Model
                             return $this->image_path;
                         }
                             // Si es en s3, no muestra porque debe tener el dominio configurado desde DigitalOcean
-                            return Storage::url($this->image_path);
+                            return Storage::disk('s3')->url($this->image_path);
 
                             // Acceso al space de DigitalOcean sin limites
                             // return route('posts.image', $this);
