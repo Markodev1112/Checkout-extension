@@ -112,9 +112,11 @@
             <x-label class="mb-1">
                 Cuerpo
             </x-label>
-            <x-textarea id="editor" class="w-full" rows="8" name="body">
-                {{ old('body', $post->body) }}
-            </x-textarea>
+            <div class="ckeditor">
+                <x-textarea id="editor" class="w-full" rows="8" name="body">
+                    {{ old('body', $post->body) }}
+                </x-textarea>
+            </div>
         </div>
 
         <div class="mb-4">
