@@ -10,10 +10,15 @@ class PostController extends Controller
 {
     public function image ( Post $post )
     {
-        $image = Storage::get($post->image_path);
+        /* $image = Storage::get($post->image_path);
 
         return response($image)
-            ->header('Content-Type', 'image/jpeg');
+            ->header('Content-Type', 'image/jpeg'); */
+
+        return Storage::temporaryUrl(
+            $post->image_path,
+            now()->addMinutes(5)
+        );
 
     }
 }
