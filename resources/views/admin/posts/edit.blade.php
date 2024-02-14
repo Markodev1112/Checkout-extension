@@ -112,7 +112,7 @@
             <x-label class="mb-1">
                 Cuerpo
             </x-label>
-            <x-textarea class="w-full" rows="8" name="body">
+            <x-textarea id="editor" class="w-full" rows="8" name="body">
                 {{ old('body', $post->body) }}
             </x-textarea>
         </div>
@@ -183,16 +183,12 @@
                     }
                 });
             });
-        </script>
 
-        <script>
             function deletePost(){
                 let form = document.getElementById('formDelete');
                 form.submit();
             }
-        </script>
 
-        <script>
             function previewImage(event, querySelector){
 
                 //Recuperamos el input que desencadeno la acción
@@ -214,6 +210,14 @@
                 $imgPreview.src = objectURL;
                             
             }
+
+            //Ckeditor
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+
         </script>
     @endpush
     
