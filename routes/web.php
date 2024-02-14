@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -72,3 +73,6 @@ Route::get('/prueba3', function(){
 
 Route::get('/posts/{post}/image', [PostController::class, 'image'])
     ->name('posts.image');
+
+Route::post('images/upload', [ImageController::class, 'upload'])
+    ->name('images.upload');

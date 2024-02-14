@@ -215,7 +215,20 @@
 
             //Ckeditor
             ClassicEditor
-                .create( document.querySelector( '#editor' ) )
+                .create( document.querySelector( '#editor' ),{
+                    simpleUpload: {
+                        // The URL that the images are uploaded to.
+                        uploadUrl: "{{ route('images.upload') }}",
+
+                        // Enable the XMLHttpRequest.withCredentials property.
+                        withCredentials: true,
+
+                        // Headers sent along with the XMLHttpRequest to the upload server.
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        }
+                    }
+                } )
                 .catch( error => {
                     console.error( error );
                 } );
