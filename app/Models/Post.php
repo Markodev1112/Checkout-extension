@@ -43,16 +43,16 @@ class Post extends Model
                             return $this->image_path;
                         }
                             // Si es en s3, no muestra porque debe tener el dominio configurado desde DigitalOcean
-                            // return Storage::url($this->image_path);
+                            return Storage::url($this->image_path);
 
                             // Acceso al space de DigitalOcean sin limites
                             // return route('posts.image', $this);
 
                             // Acceso con limitacion de tiempo para el space de DigitalOcean
-                            return Storage::temporaryUrl(
+                            /* return Storage::temporaryUrl(
                                 $this->image_path,
                                 now()->addMinutes(5)
-                            );
+                            ); */
                 } else {
                     return 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg';
                 }
