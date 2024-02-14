@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,3 +69,6 @@ Route::get('/prueba3', function(){
     // return "se elimino el direcorio";
 
 });
+
+Route::get('/posts/{post}/image', [PostController::class, 'image'])
+    ->name('posts.image');
