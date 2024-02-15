@@ -42,8 +42,11 @@ class Post extends Model
                         if ( substr($this->image_path, 0, 8) === 'https://' ) {
                             return $this->image_path;
                         }
-                            // Si es en s3, no muestra porque debe tener el dominio configurado desde DigitalOcean
-                            return Storage::disk('s3')->url($this->image_path);
+                            // Si es en s3, en cuanto a configuracion de s3 no muestra porque debe tener el dominio configurado desde DigitalOcean
+                            // return Storage::disk('s3')->url($this->image_path);
+
+                            // Disco por defecto
+                            return Storage::url($this->image_path);
 
                             // Acceso al space de DigitalOcean sin limites
                             // return route('posts.image', $this);
