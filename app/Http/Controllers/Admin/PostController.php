@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -17,7 +18,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest('id')->paginate(10);
+        // $posts = Post::latest('id')->paginate(10);
+        $posts = Post::where('user_id', auth()->id())
+            ->latest('id')
+            ->paginate(10);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -59,6 +64,14 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        // Esto te da mas flexibilidad para guardar quien quizo entrar o cosas parecidas
+        if ( !Gate::allows('author', $post) ) {
+            abort(403, 'No tienes permisos para editar este post');
+        }
+
+        // Algo mas general
+        /* $this->authorize('author', $post); */
+
         $categories = Category::all();
 
         return view('admin.posts.edit', compact('post', 'categories'));
